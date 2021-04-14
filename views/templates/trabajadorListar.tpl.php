@@ -26,13 +26,14 @@
 						<td>{$listaTrabajador[i]->get_ape_trab()}</td>
 						<td>{$listaTrabajador[i]->get_fec_ini()}</td>
 						<td>{$listaTrabajador[i]->get_sueldo()}</td>
-						<td><a href="index.php?action=trabajador&ren={$listaTrabajador[i]->get_id()}">Rename</a></td>
-						<td><a href="index.php?action=trabajador&del={$listaTrabajador[i]->get_id()}">Delete</a></td>
+						<td><a href="index.php?action=trabajador&update={$listaTrabajador[i]->get_id()}">Update</a></td>
+						<td><a href="index.php?action=trabajador&delete={$listaTrabajador[i]->get_id()}">Delete</a></td>
 					</tr>
 				</tbody>
 			{/section}
 		</table>
-		<input type="submit" name="crea" value="Create">
+		<input type="submit" name="create" value="Create">
+		<input type="submit" name="read" value="Read">
 		<input type="submit" name="exit" value="Exit">
 	</form>
 </body>

@@ -4,7 +4,7 @@
 		public function __construct() {
 		}
 
-		public function listarTrabajador() {
+		public function listar() {
 			try {
 					$sql = "SELECT id, nom_trab, ape_trab, fec_ini, sueldo FROM trabajador";
 
@@ -33,53 +33,26 @@
 				}
 		}
 
-
-
-//*****************
-
-
-		public function buscar($usuario) {
+		public function insertar($trabajadorVO) {
 			try {
-					$sql = "SELECT usuario FROM sc_usuario WHERE usuario = :usuario limit 1";
+				$bd = new ConexionDB();
+				$sql = "INSERT INTO trabajador (nom_trab, ape_trab, fec_ini, sueldo)
+							            VALUES (:nom_trab, :ape_trab, :fec_ini, :sueldo)";
 
-					$bd = new ConexionDB();
+					$nom = $trabajadorVO->get_nom_trab();
+					$ape = $trabajadorVO->get_ape_trab();
+					$fec = $trabajadorVO->get_fec_ini();
+					$sue = $trabajadorVO->get_sueldo();
+
 					$stmt = $bd->prepare($sql);
-					$stmt->bindParam('usuario', $usuario, PDO::PARAM_STR);
-					$stmt->execute();
-
-					$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-					$registroVO = new UsuarioVO();
-					$registroVO->set_usuario( $row['usuario'] );
-					
-					// Si quieres más campos usas el setter correspondiente
-
-					return $registroVO;
-				
-				} catch (Exception $e) {
-					die ('No se puede ejecutar la consulta: BUSCAR->USUARIO');
-				}
-		}
-
-		public function insertar($usuario, $privilegio) {
-			try {
-					$sql = "INSERT INTO sc_usuario	(usuario, clave, privilegio, estado)
-							VALUES 					(:usuario, :clave, :privilegio, :estado)";
-
-					$clave = $usuario.date("Y");
-					$claveHash=password_hash($clave, PASSWORD_DEFAULT);
-					$estado = 1; // Por ser nuevo es 1=Activo
-
-					$bd = new ConexionDB();
-					$stmt = $bd->prepare($sql);
-					$stmt->bindParam(':usuario', $usuario, PDO::PARAM_STR);
-					$stmt->bindParam(':clave', $claveHash, PDO::PARAM_STR);
-					$stmt->bindParam(':privilegio', $privilegio, PDO::PARAM_INT);
-					$stmt->bindParam(':estado', $estado, PDO::PARAM_INT);
+					$stmt->bindParam(':nom_trab', $nom, PDO::PARAM_STR);
+					$stmt->bindParam(':ape_trab', $ape, PDO::PARAM_STR);
+					$stmt->bindParam(':fec_ini', $fec, PDO::PARAM_STR);
+					$stmt->bindParam(':sueldo', $sue, PDO::PARAM_INT);
 					$stmt->execute();
 				
 				} catch (Exception $e) {
-					die ('No se puede ejecutar la consulta: INSERTAR->USUARIO');
+					die ('No se puede ejecutar la consulta: INSERTAR');
 				}
 		}
 

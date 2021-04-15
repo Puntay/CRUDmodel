@@ -3,7 +3,7 @@
 
 	if (!empty($_GET['listar']) ) {
 		$trabajadorDAO = new TrabajadorDAO();
-		$listaTrabajador = $trabajadorDAO->listarTrabajador();
+		$listaTrabajador = $trabajadorDAO->listar();
 
 		$tpl = new Plantilla();
 		$tpl->assign('listaTrabajador', $listaTrabajador);
@@ -17,4 +17,30 @@
 		exit;
 	}
 
+	//** Crear
+	if ( ($_SERVER['REQUEST_METHOD'] == 'POST') && (!empty($_POST['create'])) ) {
+		$tpl = new Plantilla();
+		$tpl->display('trabajadorFormulario.tpl.php');
+		exit;
+	}
+
+	//** Insert
+	if ( ($_SERVER['REQUEST_METHOD'] == 'POST') && (!empty($_POST['insert'])) ) {
+		$trabajadorVO = new TrabajadorVO();
+		$trabajadorVO->set_nom_trab($_POST['nom']);
+		$trabajadorVO->set_ape_trab($_POST['ape']);
+		$trabajadorVO->set_fec_ini($_POST['fec']);
+		$trabajadorVO->set_sueldo($_POST['sue']);
+
+		$trabajadorDAO = new TrabajadorDAO();
+		$trabajadorDAO->insertar($trabajadorVO);
+		header('Location: index.php');
+		header('Location: index.php?action=trabajador&listar=TRUE');
+		exit();
+	}
+
+	if (!empty($_GET['update'])) {
+		echo "EYESDLSDKFJS";
+		exit;
+	}
 ?>

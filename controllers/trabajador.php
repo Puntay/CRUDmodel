@@ -34,9 +34,14 @@
 
 		$trabajadorDAO = new TrabajadorDAO();
 		$trabajadorDAO->insertar($trabajadorVO);
-		header('Location: index.php');
 		header('Location: index.php?action=trabajador&listar=TRUE');
 		exit();
+	}
+
+	//** Salir
+	if ( ($_SERVER['REQUEST_METHOD'] == 'POST') && (!empty($_POST['salir'])) ) {
+		header('Location: index.php?action=trabajador&listar=TRUE');
+		exit;
 	}
 
 	if (!empty($_GET['update'])) {

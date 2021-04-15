@@ -16,7 +16,7 @@
 		<input type="number" name="sue"><p>
 
 		<input type="submit" name="insert" value="Insert">
-		<input type="submit" name="cerrar" value="Cerrar">
+		<input type="submit" name="salir" value="Sallir">
 	</form>
 </body>
 </html>

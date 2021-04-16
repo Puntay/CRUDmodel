@@ -35,15 +35,16 @@
 
 		public function insertar($trabajadorVO) {
 			try {
-				$bd = new ConexionDB();
-				$sql = "INSERT INTO trabajador (nom_trab, ape_trab, fec_ini, sueldo)
-							            VALUES (:nom_trab, :ape_trab, :fec_ini, :sueldo)";
+				
+					$sql = "INSERT INTO trabajador (nom_trab, ape_trab, fec_ini, sueldo)
+							VALUES (:nom_trab, :ape_trab, :fec_ini, :sueldo)";
 
 					$nom = $trabajadorVO->get_nom_trab();
 					$ape = $trabajadorVO->get_ape_trab();
 					$fec = $trabajadorVO->get_fec_ini();
 					$sue = $trabajadorVO->get_sueldo();
-
+					
+					$bd = new ConexionDB();
 					$stmt = $bd->prepare($sql);
 					$stmt->bindParam(':nom_trab', $nom, PDO::PARAM_STR);
 					$stmt->bindParam(':ape_trab', $ape, PDO::PARAM_STR);
@@ -53,6 +54,23 @@
 				
 				} catch (Exception $e) {
 					die ('No se puede ejecutar la consulta: INSERTAR');
+				}
+		}
+
+		public function eliminar($trabajadorVO) {
+			try {
+
+					$sql = "DELETE FROM trabajador WHERE id = :id";
+
+					$id = $trabajadorVO->get_id();
+
+					$bd = new ConexionDB();
+					$stmt = $bd->prepare($sql);
+					$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+					$stmt->execute();
+				
+				} catch (Exception $e) {
+					die ('No se puede ejecutar la consulta: ELIMINAR');
 				}
 		}
 

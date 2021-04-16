@@ -18,6 +18,7 @@
 					<th scope="col"> </th>
 				</tr>
 			</thead>
+			<input id="prodId" name="prodId" type="hidden" value="xm234jq">
 			{section name=i loop=$listaTrabajador}
 				<tbody> 
 					<tr>

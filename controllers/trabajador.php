@@ -45,7 +45,17 @@
 	}
 
 	if (!empty($_GET['update'])) {
-		echo "EYESDLSDKFJS";
+		echo "ACTUALIZAR";
+		exit;
+	}
+
+	if (!empty($_GET['delete'])) {
+		$trabajadorVO = new TrabajadorVO();
+		$trabajadorVO->set_id($_GET['delete']);
+
+		$trabajadorDAO = new TrabajadorDAO();
+		$trabajadorDAO->eliminar($trabajadorVO);
+		header('Location: index.php?action=trabajador&listar=TRUE');
 		exit;
 	}
 ?>

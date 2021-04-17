@@ -25,17 +25,14 @@
 					} else { 
 						$trabajador = NULL;
 					}
-
 					return $trabajador;
-				
 				} catch (Exception $e) {
-					die ('No se puede ejecutar la consulta: LISTAR TRABAJADORES');
+					die ('No se pudo ejecutar LISTAR');
 				}
 		}
 
 		public function insertar($trabajadorVO) {
 			try {
-				
 					$sql = "INSERT INTO trabajador (nom_trab, ape_trab, fec_ini, sueldo)
 							VALUES (:nom_trab, :ape_trab, :fec_ini, :sueldo)";
 
@@ -51,15 +48,13 @@
 					$stmt->bindParam(':fec_ini', $fec, PDO::PARAM_STR);
 					$stmt->bindParam(':sueldo', $sue, PDO::PARAM_INT);
 					$stmt->execute();
-				
 				} catch (Exception $e) {
-					die ('No se puede ejecutar la consulta: INSERTAR');
+					die ('No se pudo ejecutar INSERTAR');
 				}
 		}
 
 		public function eliminar($trabajadorVO) {
 			try {
-
 					$sql = "DELETE FROM trabajador WHERE id = :id";
 
 					$id = $trabajadorVO->get_id();
@@ -68,9 +63,8 @@
 					$stmt = $bd->prepare($sql);
 					$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 					$stmt->execute();
-				
 				} catch (Exception $e) {
-					die ('No se puede ejecutar la consulta: ELIMINAR');
+					die ('No se pudo ejecutar ELIMINAR');
 				}
 		}
 
@@ -95,23 +89,18 @@
 					$trabajadorVO->set_sueldo( $row['sueldo'] );
 					$trabajador = $trabajadorVO;
 					return $trabajador;
-				
 				} catch (Exception $e) {
-					die ('No se puede ejecutar la consulta: BUSCAR');
+					die ('No se pudo ejecutar BUSCAR');
 				}
 		}
 
 		//** Actualizar
 		public function actualizar($trabajadorVO) {
 			try {
-				
-					$sql = "UPDATE trabajador
-							SET		nom_trab = :nom,
-									ape_trab = :ape,
-									sueldo   = :sue
+					$sql = "UPDATE trabajador SET nom_trab = :nom, ape_trab = :ape, sueldo = :sue
 							WHERE 	id = :id";
 
-					$id = $trabajadorVO->get_id();
+					$id  = $trabajadorVO->get_id();
 					$nom = $trabajadorVO->get_nom_trab();
 					$ape = $trabajadorVO->get_ape_trab();
 					$sue = $trabajadorVO->get_sueldo();
@@ -123,9 +112,8 @@
 					$stmt->bindParam(':ape', $ape, PDO::PARAM_STR);
 					$stmt->bindParam(':sue', $sue, PDO::PARAM_INT);
 					$stmt->execute();
-				
 				} catch (Exception $e) {
-					die ('No se puede ejecutar la consulta: ACTUALIZAR');
+					die ('No se pudo ejecutar ACTUALIZAR');
 				}
 		}
 

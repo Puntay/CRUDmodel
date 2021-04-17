@@ -1,6 +1,7 @@
 <?php
 	header('Content-Type: text/html; charset=utf-8');
 
+	//**Listar
 	if (!empty($_GET['listar']) ) {
 		$trabajadorDAO = new TrabajadorDAO();
 		$listaTrabajador = $trabajadorDAO->listar();
@@ -68,6 +69,7 @@
 		header('Location: index.php?action=trabajador&listar=TRUE');
 		exit;
 	}
+
 	//** Grabar
 	if ( ($_SERVER['REQUEST_METHOD'] == 'POST') && (!empty($_POST['grabar'])) ) {
 		$trabajadorVO = new TrabajadorVO();
@@ -79,6 +81,27 @@
 		$trabajadorDAO = new TrabajadorDAO();
 		$trabajadorDAO->actualizar($trabajadorVO);
 		header('Location: index.php?action=trabajador&listar=TRUE');
+		exit();
+	}
+
+	//** Read
+	if ( ($_SERVER['REQUEST_METHOD'] == 'POST') && (!empty($_POST['read'])) ) {
+		$tpl = new Plantilla();
+		$tpl->display('trabajadorBuscar.tpl.php');
+		exit;
+	}
+
+	//** Buscar
+	if ( ($_SERVER['REQUEST_METHOD'] == 'POST') && (!empty($_POST['buscar'])) ) {
+		$trabajadorVO = new TrabajadorVO();
+		$trabajadorVO->set_id($_POST['id']);
+
+		$trabajadorDAO = new TrabajadorDAO();
+		$listaTrabajador = $trabajadorDAO->buscar($trabajadorVO);
+
+		$tpl = new Plantilla();
+		$tpl->assign('listaTrabajador', $listaTrabajador);
+		$tpl->display('trabajadorMostrar.tpl.php');
 		exit();
 	}
 ?>

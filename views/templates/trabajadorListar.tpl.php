@@ -9,16 +9,15 @@
 		<table>
 			<thead>
 				<tr>
-					<th scope="col">ID</th>
-					<th scope="col">NOMBRES</th>
-					<th scope="col">APELLIDOS</th>
-					<th scope="col">FECHA</th>
-					<th scope="col">SUELDO</th>
-					<th scope="col"> </th>
-					<th scope="col"> </th>
+					<th>ID</th>
+					<th>NOMBRES</th>
+					<th>APELLIDOS</th>
+					<th>FECHA</th>
+					<th>SUELDO</th>
+					<th> </th>
+					<th> </th>
 				</tr>
 			</thead>
-			<input id="prodId" name="prodId" type="hidden" value="xm234jq">
 			{section name=i loop=$listaTrabajador}
 				<tbody> 
 					<tr>

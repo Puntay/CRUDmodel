@@ -4,11 +4,10 @@ _Ejemplo utilizando MVC (Modelo, Vista y Controlador) con patrones DAO (Data Acc
 
 ## Comenzando 🚀
 
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+_El presente modelo fue desarrollado para propósitos de análisis y pruebas.
+Se muestra el uso de la arquitectura MVC para separar las tres capas de desarrollo de software, adicionalmente se complementan con el uso de los patrones DAO y VO, dentro de ellos el uso de Setters y Getters como parte del encapsulamiento de dichos objetos._
 
 ### Pre-requisitos 📋
-
-_Que cosas necesitas para instalar el software y como instalarlas_
 
 ```
 Debes tener instalado Xampp o similar [https://www.apachefriends.org/es/download.html]
@@ -27,7 +26,10 @@ CREATE TABLE `trabajador` (
   `sueldo` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+```
+_Agregar registros de prueba_
 
+```
 INSERT INTO `trabajador` (`id`, `nom_trab`, `ape_trab`, `fec_ini`, `sueldo`) VALUES
 (1, 'PABLO', 'GONZALEZ', '1965-06-15', '3500.00'),
 (2, 'JUAN', 'QUISPE', '1970-12-11', '2750.00'),
@@ -60,7 +62,7 @@ _Las herramientas utilizadas son:_
 
 ## Autor ✒️
 
-* **Pablo Untay** - *Diseño y Desarrollo* - [Puntay](https://github.com/Puntay)
+* **Puntay** - *Diseño y Desarrollo* - [Puntay](https://github.com/Puntay)
 
 ---
 ⌨️

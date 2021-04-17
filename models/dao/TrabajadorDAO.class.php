@@ -74,6 +74,61 @@
 				}
 		}
 
+		public function buscar($trabajadorVO) {
+			try {
+					$sql = "SELECT id, nom_trab, ape_trab, sueldo FROM trabajador 
+							WHERE id = :id limit 1";
+					
+					$id = $trabajadorVO->get_id();
+
+					$bd = new ConexionDB();
+					$stmt = $bd->prepare($sql);
+					$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+					$stmt->execute();
+
+					$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+					$trabajadorVO = new TrabajadorVO();
+					$trabajadorVO->set_id( $row['id'] );
+					$trabajadorVO->set_nom_trab( $row['nom_trab'] );
+					$trabajadorVO->set_ape_trab( $row['ape_trab'] );
+					$trabajadorVO->set_sueldo( $row['sueldo'] );
+					$trabajador = $trabajadorVO;
+					return $trabajador;
+				
+				} catch (Exception $e) {
+					die ('No se puede ejecutar la consulta: BUSCAR');
+				}
+		}
+
+		//** Actualizar
+		public function actualizar($trabajadorVO) {
+			try {
+				
+					$sql = "UPDATE trabajador
+							SET		nom_trab = :nom,
+									ape_trab = :ape,
+									sueldo   = :sue
+							WHERE 	id = :id";
+
+					$id = $trabajadorVO->get_id();
+					$nom = $trabajadorVO->get_nom_trab();
+					$ape = $trabajadorVO->get_ape_trab();
+					$sue = $trabajadorVO->get_sueldo();
+					
+					$bd = new ConexionDB();
+					$stmt = $bd->prepare($sql);
+					$stmt->bindParam(':id', $id, PDO::PARAM_STR);
+					$stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
+					$stmt->bindParam(':ape', $ape, PDO::PARAM_STR);
+					$stmt->bindParam(':sue', $sue, PDO::PARAM_INT);
+					$stmt->execute();
+				
+				} catch (Exception $e) {
+					die ('No se puede ejecutar la consulta: ACTUALIZAR');
+				}
+		}
+
 		public function __destruct() {
 		}
 	}

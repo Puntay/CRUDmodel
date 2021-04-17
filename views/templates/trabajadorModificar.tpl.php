@@ -6,17 +6,17 @@
 </head>
 <body>
 	<form action="index.php?action=trabajador" method="post">
+		Id:
+		<input type="text" name="id" value="{$listaTrabajador->get_id()}" ><p>
 		Nombres:
-		<input type="text" name="nom"><p>
+		<input type="text" name="nom" value="{$listaTrabajador->get_nom_trab()}"><p>
 		Apellidos:
-		<input type="text" name="ape"><p>
-		Fecha:
-		<input type="date" name="fec"><p>
+		<input type="text" name="ape" value="{$listaTrabajador->get_ape_trab()}"><p>
 		Sueldo:
-		<input type="number" name="sue"><p>
+		<input type="number" name="sue" value="{$listaTrabajador->get_sueldo()}"><p>
 
-		<input type="submit" name="insert" value="Insert">
-		<input type="submit" name="salir" value="Sallir">
+		<input type="submit" name="grabar" value="Grabar">
+		<input type="submit" name="salir" value="Salir">
 	</form>
 </body>
 </html>

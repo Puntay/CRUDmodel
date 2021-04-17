@@ -44,11 +44,21 @@
 		exit;
 	}
 
+	//** Buscar para modificar
 	if (!empty($_GET['update'])) {
-		echo "ACTUALIZAR";
+		$trabajadorVO = new TrabajadorVO();
+		$trabajadorVO->set_id($_GET['update']);
+
+		$trabajadorDAO = new TrabajadorDAO();
+		$listaTrabajador = $trabajadorDAO->buscar($trabajadorVO);
+
+		$tpl = new Plantilla();
+		$tpl->assign('listaTrabajador', $listaTrabajador);
+		$tpl->display('trabajadorModificar.tpl.php');
 		exit;
 	}
 
+	//** Delete
 	if (!empty($_GET['delete'])) {
 		$trabajadorVO = new TrabajadorVO();
 		$trabajadorVO->set_id($_GET['delete']);
@@ -57,5 +67,18 @@
 		$trabajadorDAO->eliminar($trabajadorVO);
 		header('Location: index.php?action=trabajador&listar=TRUE');
 		exit;
+	}
+	//** Grabar
+	if ( ($_SERVER['REQUEST_METHOD'] == 'POST') && (!empty($_POST['grabar'])) ) {
+		$trabajadorVO = new TrabajadorVO();
+		$trabajadorVO->set_id($_POST['id']);
+		$trabajadorVO->set_nom_trab($_POST['nom']);
+		$trabajadorVO->set_ape_trab($_POST['ape']);
+		$trabajadorVO->set_sueldo($_POST['sue']);
+
+		$trabajadorDAO = new TrabajadorDAO();
+		$trabajadorDAO->actualizar($trabajadorVO);
+		header('Location: index.php?action=trabajador&listar=TRUE');
+		exit();
 	}
 ?>

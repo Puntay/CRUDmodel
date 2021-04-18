@@ -9,8 +9,8 @@
 	//----- PATH OBJECTS	
 	define('DB_HOST', 'localhost');
 	define('DB_USER', 'root');
-	define('DB_KEY' , 'tecsup');
-	define('DB_DATA', 'almacen');
+	define('DB_KEY' , 'clave');
+	define('DB_DATA', 'base_datos');
 
 	require_once APP_BASEDIR . '/models/util/ConexionDB.class.php';
 	require_once APP_BASEDIR . '/models/util/Plantilla.class.php';
